@@ -1,0 +1,33 @@
+.user {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__photo-container {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-bottom: 2.5rem;
+        box-shadow: var(--box-shadow-large);
+    }
+
+    &__photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__name {
+        font-size: var(--font-size-small);
+
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+
+    &__email {
+        color: var(--color-secondary);
+    }
+}

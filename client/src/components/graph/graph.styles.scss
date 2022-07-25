@@ -1,0 +1,32 @@
+.graph {
+    position: relative;
+
+    &__shadow {
+        position: absolute;
+    }
+
+    &__net {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        justify-content: center;
+        align-items: center;
+        font-size: var(--font-size-medium);
+    }
+
+    &__value {
+        text-shadow: var(--text-shadow-small);
+
+        &--red {
+            color: var(--color-red);
+        }
+
+        &--green {
+            color: var(--color-primary);
+        }
+    }
+}

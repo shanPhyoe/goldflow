@@ -1,0 +1,16 @@
+.main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4rem;
+    padding: 4rem;
+    margin-left: 30rem;
+
+    @media (max-width: 1140px) {
+        gap: 3rem;
+    }
+
+    @media (max-width: 900px) {
+        margin: 0;
+    }
+}

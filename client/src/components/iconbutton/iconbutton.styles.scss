@@ -1,0 +1,19 @@
+.icon-button {
+    width: 5rem;
+    height: 5rem;
+    font-size: var(--font-size-logo);
+    padding-bottom: 3px;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow-default);
+
+    &.disabled {
+        background: var(--color-secondary);
+    }
+
+    &.small {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: var(--font-size-medium);
+        padding-bottom: 5px;
+    }
+}

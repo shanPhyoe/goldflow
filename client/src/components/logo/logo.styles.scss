@@ -1,0 +1,15 @@
+.logo {
+    font-family: var(--font-family-logo);
+    font-size: var(--font-size-logo);
+    user-select: none;
+    text-shadow: var(--text-shadow-large);
+
+    //color
+    background: linear-gradient(
+        to bottom,
+        var(--color-primary-light),
+        var(--color-primary-dark)
+    );
+    background-clip: text;
+    color: transparent;
+}

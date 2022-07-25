@@ -1,0 +1,19 @@
+.popup-message {
+    position: fixed;
+    bottom: 6rem;
+    right: 4rem;
+    background: var(--color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius-medium);
+    z-index: 10;
+    color: var(--color-secondary-dark);
+    box-shadow: var(--box-shadow-large);
+
+    &.error {
+        background: var(--color-red);
+        color: var(--color-secondary-light);
+    }
+}

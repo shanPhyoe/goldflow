@@ -1,0 +1,56 @@
+.transaction-popup {
+    &__button {
+        position: fixed;
+        top: 8rem;
+        right: 4rem;
+        margin-bottom: 2rem;
+        z-index: 10;
+
+        @media (max-width: 530px) {
+            top: 3rem;
+        }
+
+        @media (max-width: 430px) {
+            top: 2.5rem;
+            right: 2.5rem;
+        }
+    }
+
+    &__icon {
+        transition: all 0.8s ease-out;
+        display: inline-block;
+
+        &--rotate {
+            transform: rotateZ(-315deg);
+            padding-left: 0.2rem;
+            padding-bottom: 0.4rem;
+        }
+    }
+
+    &__overlay {
+        width: 42rem;
+        height: 100vh;
+        background: rgba($color: #000000, $alpha: 0.2);
+        backdrop-filter: blur(8px);
+        position: fixed;
+        right: -42rem;
+        top: 0;
+        transition: all 0.4s 0.8s ease-out;
+
+        &--shown {
+            right: 0;
+        }
+    }
+
+    &__form {
+        position: fixed;
+        right: -40rem;
+        transform: translateY(-50%);
+        top: 50%;
+        transition: all 0.8s 0.4s;
+
+        &--shown {
+            right: 4rem;
+        }
+    }
+}

@@ -1,0 +1,50 @@
+.header {
+    display: flex;
+    align-items: center;
+
+    padding: 2rem 4rem 2rem 34rem;
+
+    @media (max-width: 900px) {
+        padding-left: 4rem;
+    }
+
+    @media (max-width: 530px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3rem;
+    }
+
+    @media (max-width: 430px) {
+        gap: 2rem;
+    }
+
+    &__main {
+        @media (max-width: 530px) {
+            margin-left: 7rem;
+        }
+
+        @media (max-width: 430px) {
+            margin-left: 5rem;
+            margin-top: 5rem;
+        }
+
+        &--title {
+        }
+
+        &--text {
+            color: var(--color-secondary);
+        }
+    }
+
+    &__sub {
+        margin-left: auto;
+
+        @media (max-width: 530px) {
+            margin-left: 0;
+        }
+
+        & > span {
+            color: var(--color-primary);
+        }
+    }
+}

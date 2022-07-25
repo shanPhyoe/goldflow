@@ -1,0 +1,11 @@
+.footer {
+    margin: 0rem 0 0rem 30rem;
+    text-align: center;
+    transform: translateY(2rem);
+    color: var(--color-secondary);
+    user-select: none;
+
+    @media (max-width: 900px) {
+        margin: 0;
+    }
+}

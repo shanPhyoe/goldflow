@@ -1,0 +1,55 @@
+.history {
+    width: 80rem;
+    padding: 3rem;
+    background: linear-gradient(
+        to bottom,
+        var(--color-secondary-dark),
+        var(--color-secondary-maxdark) 50%,
+        var(--color-secondary-maxdark) 100%
+    );
+    background-size: 100% 200%;
+    border-radius: var(--border-radius-large);
+    transition: all 0.5s;
+    position: relative;
+
+    @media (max-width: 475px) {
+        width: 100%;
+    }
+
+    &:hover {
+        box-shadow: var(--box-shadow-large);
+        background-position: 100% 100%;
+
+        & > h3 {
+            color: var(--color-primary-light);
+        }
+
+        & > h4 {
+            color: var(--color-secondary-light);
+        }
+    }
+
+    &__heading {
+        margin-bottom: 3rem;
+        transition: color 0.3s;
+    }
+
+    &__sub-heading {
+        position: absolute;
+        top: 3rem;
+        right: 3rem;
+        color: var(--color-secondary);
+        transition: color 0.3s;
+    }
+
+    &__image {
+        display: block;
+        width: 40rem;
+        opacity: 0.5;
+        margin: 0 auto;
+
+        @media (max-width: 475px) {
+            width: 80%;
+        }
+    }
+}

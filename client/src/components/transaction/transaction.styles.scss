@@ -1,0 +1,31 @@
+.transaction {
+    padding: 4rem;
+    background: linear-gradient(
+        to bottom,
+        var(--color-secondary-dark),
+        var(--color-secondary-maxdark) 50%,
+        var(--color-secondary-maxdark) 100%
+    );
+    background-size: 100% 200%;
+    border-radius: var(--border-radius-large);
+    transition: all 0.3s;
+    box-shadow: var(--box-shadow-default);
+
+    &__heading {
+        margin-bottom: 3rem;
+    }
+
+    &__button {
+        width: fit-content;
+        margin: 3rem auto 0;
+    }
+
+    &:hover {
+        box-shadow: var(--box-shadow-large);
+        background-position: 100% 100%;
+
+        & > h3 {
+            color: var(--color-primary-light);
+        }
+    }
+}

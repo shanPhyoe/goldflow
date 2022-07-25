@@ -1,0 +1,129 @@
+.menu {
+    width: 30rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--box-shadow-right);
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 3rem 0 0;
+
+    @media (max-width: 900px) {
+        width: 40rem;
+        position: fixed;
+        left: -40rem;
+        top: 0;
+        background: var(--color-secondary-dark);
+        z-index: 9000;
+        transition: all 0.3s ease-out;
+
+        &--active {
+            left: 0;
+        }
+
+        &--active &__overlay {
+            left: 40rem;
+        }
+    }
+
+    @media (max-width: 420px) {
+        width: 80%;
+        left: -80%;
+
+        &--active {
+            left: 0;
+        }
+
+        &--active &__overlay {
+            left: 100%;
+        }
+    }
+
+    &__overlay {
+        display: none;
+        z-index: -5;
+        width: calc(100vw - 40rem);
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: calc(-100% - 40rem);
+        background: rgba($color: #000000, $alpha: 0.3);
+        backdrop-filter: blur(8px);
+        transition: all 0.5s linear;
+
+        @media (max-width: 900px) {
+            display: block;
+        }
+
+        @media (max-width: 420px) {
+            width: calc((100vw -100%));
+        }
+    }
+
+    &__logo {
+        width: 30rem;
+    }
+
+    &__button {
+        display: none;
+
+        @media (max-width: 900px) {
+            display: block;
+            position: absolute;
+            right: -9rem;
+            top: 8rem;
+        }
+
+        @media (max-width: 530px) {
+            top: 3rem;
+        }
+
+        @media (max-width: 430px) {
+            top: 2.5rem;
+            right: -7.5rem;
+        }
+    }
+
+    &__icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+
+        & > div {
+            width: 3rem;
+            height: 1px;
+            background: var(--color-secondary-maxdark);
+            transition: all 0.4s ease-in-out;
+        }
+    }
+
+    &--active &__icon {
+        & > div:nth-child(2) {
+            opacity: 0;
+        }
+
+        & > div:nth-child(1) {
+            transform: rotate(225deg) translate(-5px, -5px);
+        }
+        & > div:nth-child(3) {
+            transform: rotate(-225deg) translate(-4px, 4px);
+        }
+    }
+
+    &__calendar {
+        width: 26rem;
+        height: auto;
+
+        @media (max-width: 900px) {
+            width: 80%;
+        }
+    }
+
+    &__navbar {
+        margin-bottom: 3rem;
+    }
+}
