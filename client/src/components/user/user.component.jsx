@@ -14,7 +14,7 @@ const User = ({ currentUser }) => {
                         currentUser
                             ? currentUser.photoURL.startsWith('https')
                                 ? currentUser.photoURL
-                                : `http://localhost:5000/img/users/${currentUser.photoURL}`
+                                : `/img/users/${currentUser.photoURL}`
                             : defaultUserPhoto
                     }
                     alt="user"
