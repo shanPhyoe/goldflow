@@ -57,6 +57,7 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        gap: 1rem;
 
         @media (max-width: 530px) {
             width: 30%;
@@ -72,6 +73,10 @@
         &:hover {
             fill: var(--color-red);
             cursor: pointer;
+        }
+
+        &--edit:hover {
+            fill: var(--color-yellow);
         }
     }
 }

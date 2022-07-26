@@ -1,13 +1,15 @@
 .statistics {
     width: calc(50% - 2rem);
     padding: 3rem;
-    background: linear-gradient(
-        to bottom,
-        var(--color-secondary-dark),
-        var(--color-secondary-maxdark) 50%,
-        var(--color-secondary-maxdark) 100%
-    );
-    background-size: 100% 200%;
+    // background: linear-gradient(
+    //     to bottom,
+    //     var(--color-secondary-dark),
+    //     var(--color-secondary-maxdark) 50%,
+    //     var(--color-secondary-maxdark) 100%
+    // );
+    // background-size: 100% 200%;
+    background: var(--color-secondary-maxdark);
+    box-shadow: var(--box-shadow-large);
     border-radius: var(--border-radius-large);
     transition: all 0.5s;
     position: relative;
@@ -105,8 +107,7 @@
     }
 
     &:hover {
-        box-shadow: var(--box-shadow-large);
-        background-position: 100% 100%;
+        // background-position: 100% 100%;
 
         & > h3 {
             color: var(--color-primary-light);

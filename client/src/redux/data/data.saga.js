@@ -8,6 +8,7 @@ import {
     setDefaultData,
 } from './data.action';
 import { setPopupMessage } from '../popupMessage/popupMessage.action';
+import { activateLoading, deactivateLoading } from '../loading/loading.action';
 
 import dataActionTypes from './data.types';
 import userActionTypes from '../user/user.types';
@@ -44,6 +45,8 @@ export function* getMonthlyData({ payload: { month, year } }) {
     try {
         const { data } = yield goldFlow.get(
             `/data/monthlyData?month=${month}&year=${year}`,
+            // const { data } = yield goldFlow.get(
+            //     `http://localhost:5000/data/monthlyData?month=${month}&year=${year}`,
             {
                 validateStatus: () => true,
             }
@@ -71,6 +74,8 @@ export function* getMonthlyStatistics({ payload: { month, year } }) {
     try {
         const { data } = yield goldFlow.get(
             `/data/monthlyStatistics?month=${month}&year=${year}`,
+            // const { data } = yield goldFlow.get(
+            //     `http://localhost:5000/data/monthlyStatistics?month=${month}&year=${year}`,
             {
                 validateStatus: () => true,
             }
@@ -98,6 +103,8 @@ export function* getYearlyStatistics({ payload: year }) {
     try {
         const { data } = yield goldFlow.get(
             `/data/yearlyStatistics?year=${year}`
+            // const { data } = yield goldFlow.get(
+            //     `http://localhost:5000/data/yearlyStatistics?year=${year}`
         );
 
         // const { data } = fetchedData;
@@ -121,6 +128,8 @@ export function* getAllStatistics({ payload: { month, year } }) {
     try {
         const { data } = yield goldFlow.get(
             `/data/allStatistics?month=${month}&year=${year}`,
+            // const { data } = yield goldFlow.get(
+            //     `http://localhost:5000/data/allStatistics?month=${month}&year=${year}`,
             { validateStatus: () => true }
         );
 
@@ -140,10 +149,13 @@ export function* onAddTransaction() {
     yield takeLatest(dataActionTypes.ADD_TRANSACTION, addTransaction);
 }
 export function* addTransaction({ payload: transaction }) {
+    yield put(activateLoading());
     try {
         const [month, year] = getMonthAndYear(transaction.date);
 
         const { data } = yield goldFlow.post(
+            // `http://localhost:5000/data/transaction?month=${month}&year=${year}`,
+            // { validateStatus: () => true, newTransaction: transaction }
             `/data/transaction?month=${month}&year=${year}`,
             { validateStatus: () => true, newTransaction: transaction }
         );
@@ -165,17 +177,55 @@ export function* addTransaction({ payload: transaction }) {
     } catch (err) {
         yield* dataErrorHandler(err);
     }
+    yield put(deactivateLoading());
+}
+
+export function* onEditTransaction() {
+    yield takeLatest(dataActionTypes.EDIT_TRANSACTION, editTransaction);
+}
+export function* editTransaction({ payload: transaction }) {
+    yield put(activateLoading());
+    try {
+        const [month, year] = getMonthAndYear(transaction.date);
+
+        const { data } = yield goldFlow.patch(
+            // `http://localhost:5000/data/transaction?month=${month}&year=${year}`,
+            // { validateStatus: () => true, transaction }
+            `/data/transaction?month=${month}&year=${year}`,
+            { validateStatus: () => true, transaction }
+        );
+
+        const { monthlyData, statistics } = data.data;
+        const { monthlyStatistics, yearlyStatistics, lifetimeStatistics } =
+            statistics;
+
+        yield put(monthlyDataSuccess(monthlyData));
+        yield put(monthlyStatisticsSuccess(monthlyStatistics));
+        yield put(yearlyStatisticsSuccess(yearlyStatistics));
+        yield put(lifetimeStatisticsSuccess(lifetimeStatistics));
+        yield put(
+            setPopupMessage({
+                message: 'Transaction edited successfully.',
+                type: 'success',
+            })
+        );
+    } catch (err) {
+        yield* dataErrorHandler(err);
+    }
+    yield put(deactivateLoading());
 }
 
 export function* onDeleteTransaction() {
     yield takeLatest(dataActionTypes.DELETE_TRANSACTION, deleteTransaction);
 }
 export function* deleteTransaction({ payload: transaction }) {
+    yield put(activateLoading());
     try {
         const { _id, date } = transaction;
         const [month, year] = getMonthAndYear(date);
 
         const { data } = yield goldFlow.delete(
+            // `http://localhost:5000/data/transaction?month=${month}&year=${year}`,
             `/data/transaction?month=${month}&year=${year}`,
             {
                 data: { transactionId: _id },
@@ -202,6 +252,7 @@ export function* deleteTransaction({ payload: transaction }) {
     } catch (err) {
         yield* dataErrorHandler(err);
     }
+    yield put(deactivateLoading());
 }
 
 export function* onSignoutSuccess() {
@@ -218,6 +269,7 @@ export function* dataSaga() {
         call(onGetYearlyStatistics),
         call(onGetAllStatistics),
         call(onAddTransaction),
+        call(onEditTransaction),
         call(onDeleteTransaction),
         call(onSignoutSuccess),
     ]);

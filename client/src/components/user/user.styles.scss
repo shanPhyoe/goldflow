@@ -1,16 +1,22 @@
 .user {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    gap: 2rem;
 
     &__photo-container {
-        width: 10rem;
-        height: 10rem;
+        width: 5rem;
+        height: 5rem;
         border-radius: 50%;
         overflow: hidden;
-        margin-bottom: 2.5rem;
         box-shadow: var(--box-shadow-large);
+    }
+
+    &__data-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     &__photo {
@@ -28,6 +34,6 @@
     }
 
     &__email {
-        color: var(--color-secondary);
+        color: var(--color-primary);
     }
 }

@@ -1,8 +1,8 @@
 .react-calendar {
     width: 350px;
     max-width: 100%;
-    background: var(--color-secondary-maxdark);
-    border-radius: 20px;
+    /* background: var(--color-secondary-maxdark); */
+    /* border-radius: 20px; */
     box-shadow: var(--box-shadow-default);
     font-family: var(--font-family-primary);
     line-height: 1.125em;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Calendar as ReactCalendar } from 'react-calendar';
 
@@ -16,25 +16,25 @@ const Calendar = ({
     getMonthlyData,
     getMonthlyStatistics,
     getYearlyStatistics,
+    monthOnHistory,
+    yearOnHistory,
 }) => {
-    const [yearForStatistics, setYearForStatistics] = useState(
-        new Date(Date.now()).getFullYear()
-    );
+    const handleClickDay = (value, event) => {
+        const [month, year] = getMonthAndYear(value);
 
-    const handleViewChange = ({ action, activeStartDate, value, view }) => {
-        const [month, year] = getMonthAndYear(activeStartDate);
+        if (month === monthOnHistory && year === yearOnHistory) return;
 
-        if (yearForStatistics !== year) {
-            setYearForStatistics(year);
+        if (year !== yearOnHistory) {
             getYearlyStatistics(year);
             getMonthlyData({ month, year });
             getMonthlyStatistics({ month, year });
 
             return;
         }
-
-        getMonthlyData({ month, year });
-        getMonthlyStatistics({ month, year });
+        if (month !== monthOnHistory) {
+            getMonthlyData({ month, year });
+            getMonthlyStatistics({ month, year });
+        }
     };
 
     return (
@@ -43,11 +43,17 @@ const Calendar = ({
                 calendarType="US"
                 next2Label={null}
                 prev2Label={null}
-                onActiveStartDateChange={handleViewChange}
+                onClickDay={handleClickDay}
+                // onActiveStartDateChange={handleViewChange}
             />
         </>
     );
 };
+
+const mapStateToProps = state => ({
+    monthOnHistory: state.data.monthlyData.month,
+    yearOnHistory: state.data.monthlyData.year,
+});
 
 const mapDispatchToProps = dispatch => ({
     getMonthlyData: monthAndYear => dispatch(getMonthlyData(monthAndYear)),
@@ -56,4 +62,4 @@ const mapDispatchToProps = dispatch => ({
     getYearlyStatistics: year => dispatch(getYearlyStatistics(year)),
 });
 
-export default connect(null, mapDispatchToProps)(Calendar);
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar);

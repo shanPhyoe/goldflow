@@ -6,17 +6,18 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: var(--box-shadow-right);
+    background: var(--color-secondary-maxdark);
     position: fixed;
     left: 0;
     top: 0;
     padding: 3rem 0 0;
 
     @media (max-width: 900px) {
-        width: 40rem;
+        width: 35rem;
         position: fixed;
-        left: -40rem;
+        left: -35rem;
         top: 0;
-        background: var(--color-secondary-dark);
+        // background: var(--color-secondary-dark);
         z-index: 9000;
         transition: all 0.3s ease-out;
 
@@ -25,7 +26,7 @@
         }
 
         &--active &__overlay {
-            left: 40rem;
+            left: 35rem;
         }
     }
 
@@ -45,11 +46,11 @@
     &__overlay {
         display: none;
         z-index: -5;
-        width: calc(100vw - 40rem);
+        width: calc(100vw - 35rem);
         height: 100vh;
         position: absolute;
         top: 0;
-        left: calc(-100% - 40rem);
+        left: calc(-100% - 35rem);
         background: rgba($color: #000000, $alpha: 0.3);
         backdrop-filter: blur(8px);
         transition: all 0.5s linear;
@@ -65,6 +66,7 @@
 
     &__logo {
         width: 30rem;
+        margin-bottom: 3rem;
     }
 
     &__button {
@@ -74,7 +76,7 @@
             display: block;
             position: absolute;
             right: -9rem;
-            top: 8rem;
+            top: 3rem;
         }
 
         @media (max-width: 530px) {
@@ -115,15 +117,18 @@
     }
 
     &__calendar {
-        width: 26rem;
+        width: 100%;
         height: auto;
-
-        @media (max-width: 900px) {
-            width: 80%;
-        }
     }
 
     &__navbar {
+        background: var(--color-secondary-maxdark);
+        width: 100%;
+        padding: 3rem;
+        box-shadow: var(--box-shadow-default);
+    }
+
+    &__user {
         margin-bottom: 3rem;
     }
 }

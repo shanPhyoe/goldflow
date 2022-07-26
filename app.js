@@ -19,6 +19,7 @@ app.enable('trust proxy');
 // implementing cors
 app.use(
     cors({
+        origin: true, // dev
         credentials: true,
     })
 );

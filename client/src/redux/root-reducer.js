@@ -5,6 +5,7 @@ import loadingReducer from './loading/loading.reducer';
 import userReducer from './user/user.reducer';
 import dataReducer from './data/data.reducer';
 import popupMessageReducer from './popupMessage/popupMessage.reducer';
+import transactionPopupReducer from './transactionPopup/transactionPopup.reducer';
 
 const rootReducer = combineReducers({
     popupModal: popupModalReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     user: userReducer,
     data: dataReducer,
     popupMessage: popupMessageReducer,
+    transactionPopup: transactionPopupReducer,
 });
 
 export default rootReducer;

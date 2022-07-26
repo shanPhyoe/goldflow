@@ -45,6 +45,11 @@ export const addTransaction = transaction => ({
     payload: transaction,
 });
 
+export const editTransaction = transaction => ({
+    type: dataActionTypes.EDIT_TRANSACTION,
+    payload: transaction,
+});
+
 export const deleteTransaction = transaction => ({
     type: dataActionTypes.DELETE_TRANSACTION,
     payload: transaction,

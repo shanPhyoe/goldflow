@@ -6,6 +6,7 @@ const {
     getYearlyStatistics,
     getAllStatistics,
     addTransaction,
+    editTransaction,
     deleteTransaction,
     getMonthlyData,
 } = require('../controllers/dataControllers');
@@ -19,6 +20,7 @@ dataRouter.get('/yearlyStatistics', getYearlyStatistics);
 dataRouter.get('/allStatistics', getAllStatistics);
 dataRouter.get('/monthlyData', getMonthlyData);
 dataRouter.post('/transaction', addTransaction);
+dataRouter.patch('/transaction', editTransaction);
 dataRouter.delete('/transaction', deleteTransaction);
 
 module.exports = dataRouter;

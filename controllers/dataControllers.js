@@ -182,6 +182,49 @@ exports.addTransaction = catchAsyncError(async (req, res, next) => {
     });
 });
 
+exports.editTransaction = catchAsyncError(async (req, res, next) => {
+    const { transaction } = req.body;
+    const { name, transactionType, date, amount, _id } = transaction;
+    const { month, year } = req.query;
+
+    console.log(transaction);
+
+    const monthlyData = await Data.findOneAndUpdate(
+        { user: req.user._id, month, year, 'transactions._id': _id },
+        {
+            $set: {
+                'transactions.$.name': name,
+                'transactions.$.transactionType': transactionType,
+                'transactions.$.date': date,
+                'transactions.$.amount': amount,
+            },
+        },
+        { new: true }
+    );
+
+    console.log(monthlyData);
+
+    const statistics = await calculateAllStatistics(
+        month,
+        year,
+        req,
+        res,
+        next
+    );
+
+    res.status(200).json({
+        status: 'success',
+        data: {
+            monthlyData: {
+                transactions: monthlyData.transactions,
+                month,
+                year,
+            },
+            statistics,
+        },
+    });
+});
+
 exports.deleteTransaction = catchAsyncError(async (req, res, next) => {
     const { transactionId } = req.body;
     const { month, year } = req.query;

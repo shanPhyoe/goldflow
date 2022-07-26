@@ -18,7 +18,7 @@ const Main = ({ lifetimeStatistics, monthlyStatistics, yearlyStatistics }) => {
             <Statistics timeFrame={'Yearly'} statistics={yearlyStatistics} />
             <Statistics timeFrame={'Monthly'} statistics={monthlyStatistics} />
             <History />
-            <TransactionPopup />
+            <TransactionPopup buttonInclude={true} />
         </main>
     );
 };

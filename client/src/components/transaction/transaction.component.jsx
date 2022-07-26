@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { addTransaction } from '../../redux/data/data.action';
+
+import { addTransaction, editTransaction } from '../../redux/data/data.action';
+import { setTransactionShown } from '../../redux/transactionPopup/transactionPopup.action';
 
 import CustomButton from '../custombutton/custombutton.component';
 import FormInput from '../form-elements/form-input.component';
@@ -8,13 +10,35 @@ import FormSelect from '../form-elements/form-select.component';
 
 import './transaction.styles.scss';
 
-const Transaction = ({ addTransaction }) => {
+const Transaction = ({
+    addTransaction,
+    transactionToEdit,
+    editTransaction,
+    setTransactionShown,
+}) => {
     const [transactionData, setTransactionData] = useState({
         name: '',
         transactionType: 'Income',
         amount: '',
         date: new Date().toISOString().split('T')[0],
     });
+
+    useEffect(() => {
+        if (transactionToEdit)
+            setTransactionData({
+                name: transactionToEdit.name,
+                transactionType: transactionToEdit.transactionType,
+                amount: transactionToEdit.amount,
+                date: transactionToEdit.date.split('T')[0],
+            });
+        else
+            setTransactionData({
+                name: '',
+                transactionType: 'Income',
+                amount: '',
+                date: new Date().toISOString().split('T')[0],
+            });
+    }, [transactionToEdit]);
 
     const { name, transactionType, amount, date } = transactionData;
 
@@ -27,12 +51,19 @@ const Transaction = ({ addTransaction }) => {
     const handleSubmit = event => {
         event.preventDefault();
 
-        addTransaction({
-            name,
-            transactionType,
-            amount: parseFloat(amount).toFixed(2),
-            date,
-        });
+        if (transactionToEdit)
+            editTransaction({
+                ...transactionToEdit,
+                name,
+                transactionType,
+                date,
+                amount: parseFloat(amount).toFixed(2),
+            });
+        else
+            addTransaction({
+                ...transactionData,
+                amount: parseFloat(amount).toFixed(2),
+            });
 
         setTransactionData({
             ...transactionData,
@@ -40,6 +71,7 @@ const Transaction = ({ addTransaction }) => {
             amount: '',
             date: new Date().toISOString().split('T')[0],
         });
+        setTransactionShown(false);
     };
 
     return (
@@ -51,8 +83,8 @@ const Transaction = ({ addTransaction }) => {
                     type="text"
                     value={name}
                     onChange={handleChange}
-                    label="Name"
-                    placeholder="ex. Buy stocks"
+                    label="Details"
+                    placeholder="Buy stocks"
                     autoComplete="off"
                     required
                 />
@@ -70,19 +102,23 @@ const Transaction = ({ addTransaction }) => {
                     onChange={handleChange}
                     min="0"
                     label="Amount"
-                    placeholder="ex. 15"
+                    placeholder="300"
                     required
                 />
                 <FormInput
                     name="date"
                     type="date"
-                    defaultValue={date}
+                    value={date}
                     onChange={handleChange}
                     min="0"
                     label="Date"
                 />
                 <div className="transaction__button">
-                    <CustomButton>Make Transaction</CustomButton>
+                    <CustomButton>
+                        {transactionToEdit
+                            ? 'Edit Transaction'
+                            : 'Save Transaction'}
+                    </CustomButton>
                 </div>
             </form>
         </div>
@@ -91,6 +127,8 @@ const Transaction = ({ addTransaction }) => {
 
 const mapDispatchToProps = dispatch => ({
     addTransaction: transaction => dispatch(addTransaction(transaction)),
+    editTransaction: transaction => dispatch(editTransaction(transaction)),
+    setTransactionShown: boolean => dispatch(setTransactionShown(boolean)),
 });
 
 export default connect(null, mapDispatchToProps)(Transaction);

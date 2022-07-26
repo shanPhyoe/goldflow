@@ -14,7 +14,7 @@ const User = ({ currentUser }) => {
                         currentUser
                             ? currentUser.photoURL.startsWith('https')
                                 ? currentUser.photoURL
-                                : `/img/users/${currentUser.photoURL}`
+                                : `http://localhost:5000/img/users/${currentUser.photoURL}`
                             : defaultUserPhoto
                     }
                     alt="user"
@@ -22,12 +22,14 @@ const User = ({ currentUser }) => {
                     className="user__photo"
                 />
             </div>
-            <p className="user__name">
-                {currentUser ? currentUser.name : 'John Doe'}
-            </p>
-            <p className="user__email">
-                {currentUser ? currentUser.email : 'johndoe@example.com'}
-            </p>
+            <div className="user__data-container">
+                <p className="user__name">
+                    {currentUser ? currentUser.name : 'John Doe'}
+                </p>
+                <p className="user__email">
+                    {currentUser ? currentUser.email : 'johndoe@example.com'}
+                </p>
+            </div>
         </div>
     );
 };

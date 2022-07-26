@@ -28,6 +28,7 @@ export function* onIsUserLoggedIn() {
     yield takeLatest(userActionTypes.IS_USER_LOGGED_IN, isUserLoggedIn);
 }
 export function* isUserLoggedIn() {
+    // const { data } = yield goldFlow.get('http://localhost:5000/user');
     const { data } = yield goldFlow.get('/user');
 
     if (!data) return;
@@ -43,6 +44,9 @@ export function* signInStart({ payload: { email, password } }) {
     yield put(activateLoading());
     try {
         const fetchedData = yield goldFlow.post('/user/signin', {
+            // const fetchedData = yield goldFlow.post(
+            //     'http://localhost:5000/user/signin',
+            // {
             validateStatus: () => true,
             email,
             password,
@@ -80,6 +84,9 @@ export function* googleSignInStart() {
         const { displayName, email, photoURL } = user;
 
         const fetchedData = yield goldFlow.post('/user/googlesignin', {
+            // const fetchedData = yield goldFlow.post(
+            //     'http://localhost:5000/user/googlesignin',
+            //     {
             validateStatus: () => true,
             displayName,
             email,
@@ -125,6 +132,9 @@ export function* signUpStart({ payload: { name, email, password } }) {
     yield put(activateLoading());
     try {
         const fetchedData = yield goldFlow.post('/user/signup', {
+            // const fetchedData = yield goldFlow.post(
+            //     'http://localhost:5000/user/signup',
+            //     {
             validateStatus: () => true,
             name,
             email,
@@ -224,6 +234,9 @@ export function* changePasswordStart({
 
     try {
         const fetchedData = yield goldFlow.patch('/user/changePassword', {
+            // const fetchedData = yield goldFlow.patch(
+            //     'http://localhost:5000/user/changePassword',
+            //     {
             validateStatus: () => true,
             oldPassword,
             newPassword,
