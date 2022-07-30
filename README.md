@@ -1,4 +1,4 @@
-# goldflow
+# GOLDFLOW
 ### Expense tracker app
 An expense tracker app that will record and calculate al the statistics for incomes,
 expenses and investments data by monthly, yearly and lifetime. A full stack app that user
